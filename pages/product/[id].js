@@ -19,7 +19,20 @@ const ProductItem = () => {
     }
   }, [id]);
 
-  return <div>{avo.name}</div>;
+  return (
+    <div>
+      <img src={avo.image}></img>
+      <h2>{avo.name}</h2>
+      <p>{avo.attributes.description}</p>
+      <style jsx>
+        {`
+          h2 {
+            color: brown;
+          }
+        `}
+      </style>
+    </div>
+  );
 };
 
 export default ProductItem;

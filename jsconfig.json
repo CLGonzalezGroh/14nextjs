@@ -3,8 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "assets/*": ["assets/*"],
-      "database/*": ["database/*"],
-      "components/*": ["components/*"],
+      "@database": ["database/db.js"],
+      "@components/*": ["components/*"],
       "config/*": ["config/*"],
       "constants/*": ["constants/*"],
       "context/*": ["context/*"],

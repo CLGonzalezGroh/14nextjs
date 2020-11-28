@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 const HomePage = () => {
   const [productList, SetProductList] = useState([]);
@@ -13,11 +14,32 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       {productList.map((product) => (
-        <div key={product.id}>{product.name}</div>
+        <div key={product.id} className="card">
+          <Link href={`/product/${product.id}`}>
+            <a>
+              <img src={product.image}></img>
+              <h2>{product.name}</h2>
+            </a>
+          </Link>
+        </div>
       ))}
-      <h1>Hello Next world!</h1>
+      <style jsx>
+        {`
+          .container {
+            display: flex;
+            flex-wrap: nowrap;
+          }
+          .card {
+            width: 400px;
+            height: 400px;
+            border: 1px solid red;
+            display: block;
+            text-align: center;
+          }
+        `}
+      </style>
     </div>
   );
 };
