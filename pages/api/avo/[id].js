@@ -5,11 +5,9 @@ const allAvos = async (request, response) => {
   const {
     query: { id },
   } = request;
-  const item = await db.getById(id);
+  const avo = await db.getById(id);
 
-  response.statusCode = 200;
-  response.setHeader("Context-type", "application/json");
-  response.end(JSON.stringify({ data: item }));
+  response.status(200).json(avo);
 };
 
 export default allAvos;

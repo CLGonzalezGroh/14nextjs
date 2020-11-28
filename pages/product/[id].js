@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 const ProductItem = () => {
   const {
-    query: { productId },
+    query: { id },
   } = useRouter();
-  return <div>ProductId: {productId}</div>;
+
+  const [avo, SetAvo] = useState([]);
+
+  useEffect(() => {
+    if (id) {
+      window
+        .fetch(`/api/avo/${id}`)
+        .then((response) => response.json())
+        .then((avo) => {
+          SetAvo(avo);
+        });
+    }
+  }, [id]);
+
+  return <div>{avo.name}</div>;
 };
 
 export default ProductItem;
