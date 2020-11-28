@@ -23,7 +23,7 @@ const ProductItem = () => {
     <div>
       <img src={avo.image}></img>
       <h2>{avo.name}</h2>
-      <p>{avo.attributes.description}</p>
+      {avo.attributes && <p>${avo.attributes.description}</p>}
       <style jsx>
         {`
           h2 {
