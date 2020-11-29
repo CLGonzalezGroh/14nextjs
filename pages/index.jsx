@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
-const HomePage = () => {
-  const [productList, SetProductList] = useState([]);
+// SERVER SIDE RENDERED
+export const getServerSideProps = async () => {
+  const response = await fetch("https://14nextjs.vercel.app/api/avo");
+  const { data } = await response.json();
+  return {
+    props: {
+      productList: data,
+    },
+  };
+};
 
-  useEffect(() => {
-    window
-      .fetch("api/avo")
-      .then((response) => response.json())
-      .then(({ data, length }) => {
-        SetProductList(data);
-      });
-  }, []);
+const HomePage = ({ productList }) => {
+  // CLIENT SIDE RENDERED
+  // const [productList, SetProductList] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("api/avo")
+  //     .then((response) => response.json())
+  //     .then(({ data, length }) => {
+  //       SetProductList(data);
+  //     });
+  // }, []);
 
   return (
     <div className="container">

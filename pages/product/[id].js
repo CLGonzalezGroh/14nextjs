@@ -10,8 +10,7 @@ const ProductItem = () => {
 
   useEffect(() => {
     if (id) {
-      window
-        .fetch(`/api/avo/${id}`)
+      fetch(`/api/avo/${id}`)
         .then((response) => response.json())
         .then((avo) => {
           SetAvo(avo);
