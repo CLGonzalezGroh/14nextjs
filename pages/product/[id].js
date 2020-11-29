@@ -1,22 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-const ProductItem = () => {
-  const {
-    query: { id },
-  } = useRouter();
+// REQUIRED FOR DYNAMIC PAGES
+export const getStaticPaths = async () => {
+  const response = await fetch("https://14nextjs.vercel.app/api/avo");
+  const { data } = await response.json();
+  const paths = data.map((avo) => ({
+    params: {
+      id: avo.id,
+    },
+  }));
 
-  const [avo, SetAvo] = useState([]);
+  return {
+    paths,
+    fallback: false, //404 if !id
+  };
+};
 
-  useEffect(() => {
-    if (id) {
-      fetch(`/api/avo/${id}`)
-        .then((response) => response.json())
-        .then((avo) => {
-          SetAvo(avo);
-        });
-    }
-  }, [id]);
+// STATIC GENERATION
+export const getStaticProps = async (context) => {
+  const id = context.params.id;
+  const response = await fetch(`https://14nextjs.vercel.app/api/avo/${id}`);
+  const avo = await response.json();
+  return {
+    props: {
+      avo,
+    },
+  };
+};
+
+const ProductItem = ({ avo }) => {
+  // CLIENT SIDE RENDERED
+  // const {
+  //   query: { id },
+  // } = useRouter();
+
+  // const [avo, SetAvo] = useState([]);
+
+  // useEffect(() => {
+  //   if (id) {
+  //     fetch(`/api/avo/${id}`)
+  //       .then((response) => response.json())
+  //       .then((avo) => {
+  //         SetAvo(avo);
+  //       });
+  //   }
+  // }, [id]);
 
   return (
     <div>
